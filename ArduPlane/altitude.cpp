@@ -77,7 +77,6 @@ void Plane::setup_glide_slope(void)
     switch (control_mode->mode_number()) {
     case Mode::Number::RTL:
     case Mode::Number::AVOID_ADSB:
-    case Mode::Number::GUIDED:
         /* glide down slowly if above target altitude, but ascend more
            rapidly if below it. See
            https://github.com/ArduPilot/ardupilot/issues/39
@@ -87,6 +86,10 @@ void Plane::setup_glide_slope(void)
         } else {
             reset_offset_altitude();
         }
+        break;
+
+    case Mode::Number::GUIDED:
+        reset_offset_altitude();
         break;
 
     case Mode::Number::AUTO:
